@@ -78,8 +78,17 @@ app.post("/compose",function(req,res){
 })
 
 app.get("/posts/:postId",function(req,res){
-  Post.findOne({_id:postId},(err,doc)=>{
-    res.render("post",{post: doc});
+  Post.findOne({_id:req.params.postId},(err,doc)=>{
+    if(!err){
+      if(doc){
+        res.render("post",{post: doc});
+      }else{
+        res.send("doc not found")
+      }
+    }else{
+      res.send(err);
+    }
+
   })
 })
 let port = process.env.PORT || 3000;
@@ -95,7 +104,6 @@ async function savePost(post){
 async function getAllposts(req,res){
   try{
     const posts = await Post.find({});
-    console.log(posts);
     res.render("home",{homeContent: homeStartingContent,posts: posts});
   }catch(err){
     console.log(err);
