@@ -1,4 +1,5 @@
-const admin = require("./dbAdmin");
+require("dotenv").config();
+console.log(process.env.DBUSERNAME);
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -6,7 +7,7 @@ const _ = require("lodash");
 const mongoose = require("mongoose");
 // const url = "mongodb+srv://<username>:<password>@clustername.mongodb.net/dailyjournalDB?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true";
 //string interpolation using javascript string template
-const uri = `mongodb+srv://${admin.dbAdmin.userName}:${admin.dbAdmin.password}@cluster0.uxrwxyx.mongodb.net/dailyjournalDB?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DBUSERNAME}:${process.env.PASSWORD}@cluster0.uxrwxyx.mongodb.net/dailyjournalDB?retryWrites=true&w=majority`;
 // const posts = [
 //   {
 //     postTitle:"Day1",
